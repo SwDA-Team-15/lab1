@@ -69,11 +69,13 @@ The Python worker is an independent microservice that processes emails in the ba
    cd lab1-worker
    ```
 2. Create and activate a virtual environment:
-   - **Windows:** ```bash
+   - **Windows:**
+     ```bash
      python -m venv .venv
      .\.venv\Scripts\activate
      ```
-   - **Mac/Linux:** ```bash
+   - **Mac/Linux:**
+     ```bash
      python3 -m venv .venv
      source .venv/bin/activate
      ```
