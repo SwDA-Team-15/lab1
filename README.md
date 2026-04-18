@@ -15,7 +15,7 @@ Before you begin, make sure you have the following installed on your PC:
 First, clone this repository to your local machine and open the folder:
 ```bash
 git clone https://github.com/SwDA-Team-15/lab1.git
-cd mzinga-lab1
+cd lab1
 ```
 
 ---
