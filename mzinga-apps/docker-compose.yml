@@ -83,7 +83,7 @@ services:
       timeout: 30s
       start_period: 0s
       start_interval: 1s
-      retries: 30d
+      retries: 30
   messagebus:
     image: rabbitmq:4.2.5-management-alpine
     hostname: rabbitmq
