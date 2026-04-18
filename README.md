@@ -15,7 +15,7 @@ Before you begin, make sure you have the following installed on your PC:
 First, clone this repository to your local machine and open the folder:
 ```bash
 git clone https://github.com/SwDA-Team-15/lab1.git
-cd lab1
+cd mzinga-lab1
 ```
 
 ---
@@ -45,13 +45,39 @@ docker compose up database messagebus cache -d
 ---
 
 ## 🌐 Step 2: Start Payload CMS
-Now, let's start the main web application. 
+Now, let's configure and start the main web application. 
 
 1. Ensure you are still inside the `mzinga-apps` directory.
-2. Open the `.env` file and verify this line is at the bottom (this enables the worker flow):
+2. **Create the `.env` file:** Create a new file named `.env` in the `mzinga-apps` folder and paste this exact configuration inside it:
    ```env
+   # Core Config
+   PAYLOAD_SECRET=r3pl4c3m3w1thv4l1ds3cr3t
+   TENANT=local-tenant
+   ENV=prod
+   PAYLOAD_PUBLIC_SERVER_URL=http://localhost:3000
+   CORS_CONFIGS=*
+   DISABLE_TRACING=1
+
+   # Database Config
+   MONGO_PORT=27017
+   MONGODB_URI="mongodb://admin:admin@localhost:27017/mzinga?authSource=admin&directConnection=true"
+   MONGO_HOST=YOUR_LOCAL_IP_ADDRESS
+   
+   # Windows Volume Overrides
+   DRIVER_OPTS_DEVICE=/tmp
+   DRIVER_OPTS_TYPE="none"
+   DRIVER_OPTS_OPTIONS="bind"
+
+   # Feature Flags for Lab 1
+   DEBUG_EMAIL_SEND=1
    COMMUNICATIONS_EXTERNAL_WORKER=true
    ```
+
+   ⚠️ **CRITICAL IP CONFIGURATION:**
+   You must replace `YOUR_LOCAL_IP_ADDRESS` in the `.env` file above with your machine's actual IP address for the database connection to work.
+   - **Windows:** Open a terminal, run `ipconfig`, and look for your "IPv4 Address" (e.g., `192.168.x.x`).
+   - **Mac/Linux:** Open a terminal, run `ifconfig` or `ip a`, and look for your local IP address.
+
 3. Install dependencies and start the server:
    ```bash
    npm install
@@ -68,7 +94,15 @@ The Python worker is an independent microservice that processes emails in the ba
    ```bash
    cd lab1-worker
    ```
-2. Create and activate a virtual environment:
+2. **Create the `.env` file:** Create a new file named `.env` in the `lab1-worker` folder and paste this exact configuration inside it:
+   ```env
+   MONGODB_URI=mongodb://admin:admin@localhost:27017/mzinga?authSource=admin&directConnection=true
+   POLL_INTERVAL_SECONDS=5
+   SMTP_HOST=localhost
+   SMTP_PORT=1025
+   EMAIL_FROM=worker@mzinga.io
+   ```
+3. Create and activate a virtual environment:
    - **Windows:**
      ```bash
      python -m venv .venv
@@ -79,11 +113,11 @@ The Python worker is an independent microservice that processes emails in the ba
      python3 -m venv .venv
      source .venv/bin/activate
      ```
-3. Install the required Python libraries:
+4. Install the required Python libraries:
    ```bash
    pip install -r requirements.txt
    ```
-4. Start the worker:
+5. Start the worker:
    ```bash
    python worker.py
    ```
