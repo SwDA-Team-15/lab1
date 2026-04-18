@@ -106,13 +106,18 @@ The Python worker is an independent microservice that processes emails in the ba
    - **Windows:**
      ```bash
      python -m venv .venv
+     ```
+     ```
      .\.venv\Scripts\activate
      ```
    - **Mac/Linux:**
      ```bash
      python3 -m venv .venv
+     ```
+     ```
      source .venv/bin/activate
      ```
+     
 4. Install the required Python libraries:
    ```bash
    pip install -r requirements.txt
