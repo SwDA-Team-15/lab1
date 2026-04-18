@@ -130,7 +130,7 @@ The Python worker is an independent microservice that processes emails in the ba
 Let's watch the decoupled systems work together:
 
 1. Open your browser and go to **http://localhost:3000/admin**.
-2. Log in using the admin account we created in Step 1 (`admin` / `admin`).
+2. **Register your Admin:** Since this is a fresh database, Payload will prompt you to create your first web admin user. Fill out your email and password to register and log in.
 3. Navigate to **Users** and create a dummy user with a fake email address.
 4. Navigate to **Communications** and click **Create New**.
 5. Fill out the Subject, Body, and select your dummy user in the "To" field.
